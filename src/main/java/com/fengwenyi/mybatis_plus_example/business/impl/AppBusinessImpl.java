@@ -42,7 +42,7 @@ public class AppBusinessImpl implements AppBusiness {
 
         boolean rsAddCity = mpCityService.addCity(city);
         if (rsAddCity) {
-            String cityName = city.getName();
+            String cityName = city.getAreaName();
             city = mpCityService.queryCityByName(cityName);
             if (city != null) {
                 boolean rsAddIdCard = mpIdcardService.addIdCard(idcard);

@@ -2,10 +2,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/mybatis-plus-example
+    url: jdbc:mysql://localhost:3306/hibernatetest
     username: root
 #    password: kU#m5eHY5iTiQj#q
-    password: 123456
+    password: 1qaz
 
 mybatis-plus:
   configuration:
@@ -17,4 +17,4 @@ logback:
 logging:
   level:
     com.fengwenyi.mybatis_plus_example.service.impl: trace
-    com.fengwenyi.mybatis_plus_example.controller: trace
+    com.fengwenyi.mybatis_plus_example.controller: tracet_city

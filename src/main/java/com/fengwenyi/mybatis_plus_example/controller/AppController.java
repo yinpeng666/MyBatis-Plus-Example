@@ -15,7 +15,12 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,13 +50,25 @@ public class AppController {
         return ResultHelper.success("Success", cities);
     }
 
+    @PatchMapping("/updataCity/{id}")
+    public ResultModel updataCity(@PathVariable("id")Long id){
+        List<City> cities = new ArrayList<>();
+        for (int i = 1; i < 5; i++) {
+            City city = new City();
+            city.setId(Long.valueOf(i));
+            city.setAreaName(i+"啊");
+            cities.add(city);
+        }
+        mpCityService.updateBatchById(cities);
+        return ResultHelper.success("修改成功");
+    }
 
     // 添加城市
     @PostMapping("/addCity")
     public ResultModel addCity(String name) {
         if (StringUtil.isEmpty(name))
             return ResultHelper.error("名称不能为空");
-        boolean rs = mpCityService.addCity(new City().setName(name));
+        boolean rs = mpCityService.addCity(new City().setAreaName(name));
         if (rs)
             return ResultHelper.success("Success", null);
         return ResultHelper.error("添加失败");
@@ -81,7 +98,7 @@ public class AppController {
                 .setInfo(info);
 
         // city
-        City city = new City().setName(cityName);
+        City city = new City().setAreaName(cityName);
 
         // idCard
         Idcard idcard = new Idcard().setCode(idCardCode);
@@ -100,5 +117,24 @@ public class AppController {
             return ResultHelper.error("当前页不能为空");
         IPage<Student> studentIPage = mpStudentService.queryStudentByPage(currentPage);
         return ResultHelper.success("Success", studentIPage);
+    }
+
+    @GetMapping("/testFenCi")
+    public ResultModel testFenCi(String text) throws IOException {
+//        text="中国太平成立九十周年了！";
+        List<String> list=this.cut(text);
+        System.out.println(list);
+        return ResultHelper.success("Success",list);
+    }
+
+    public List<String> cut(String msg) throws IOException {
+        StringReader sr=new StringReader(msg);
+        IKSegmenter ik=new IKSegmenter(sr, true);
+        Lexeme lex=null;
+        List<String> list=new ArrayList<>();
+        while((lex=ik.next())!=null){
+            list.add(lex.getLexemeText());
+        }
+        return list;
     }
 }

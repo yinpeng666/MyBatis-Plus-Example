@@ -25,7 +25,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("t_city")
+@TableName("city_area")
 @ApiModel(value="City对象", description="")
 public class City extends Model<City> {
 
@@ -36,7 +36,7 @@ public class City extends Model<City> {
     private Long id;
 
     @ApiModelProperty(value = "城市名称")
-    private String name;
+    private String areaName;
 
 
     public static final String ID = "id";

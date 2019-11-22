@@ -1,0 +1,1 @@
+2019-11-22 15:10:25.859 [main] ERROR o.s.b.context.logging.LoggingApplicationListener - Cannot set level: tracet_city for 'com.fengwenyi.mybatis_plus_example.controller'

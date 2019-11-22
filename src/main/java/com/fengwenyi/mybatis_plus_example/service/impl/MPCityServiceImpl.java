@@ -33,7 +33,7 @@ public class MPCityServiceImpl extends ServiceImpl<CityDao, City> implements MPC
 
         ExceptionUtil.notNull(city, "City must not null");
 
-        String name = city.getName();
+        String name = city.getAreaName();
 
         if (queryCityByName(name) == null)
             return save(city);

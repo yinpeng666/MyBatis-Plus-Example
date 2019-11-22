@@ -35,7 +35,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
     public boolean addStudent(Student student) {
         ExceptionUtil.notNull(student, "Student must not null.");
 
-        if (queryStudentByIdCardId(student.getIdcardId()) == null)
+        if(queryStudentByIdCardId(student.getIdcardId()) == null)
             return save(student);
 
         return true;
@@ -59,6 +59,7 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
     }
 
     // 简单分页查询
+    @Override
     public IPage<Student> queryStudentByPage(Long currentPage) {
         return page(new Page<>(currentPage, ConstantConfig.PAGE_SITE), null);
     }
